@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ViennaRunsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FeelingAfterRun">
+          <Key>
+            <PropertyRef Name="far_id" />
+          </Key>
+          <Property Name="far_id" Type="int" Nullable="false" />
+          <Property Name="far_datfeel" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="int" Nullable="false" />
+          <Property Name="r_user" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="r_distance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="r_duration" Type="int" Nullable="false" />
+          <Property Name="r_date" Type="date" Nullable="false" />
+          <Property Name="r_datfeel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RunningGroup">
+          <Key>
+            <PropertyRef Name="rg_id" />
+          </Key>
+          <Property Name="rg_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="rg_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="u_username" />
+          </Key>
+          <Property Name="u_username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="u_password" Type="varchar" MaxLength="255" />
+          <Property Name="u_email" Type="varchar" MaxLength="255" />
+          <Property Name="u_runninggroup" Type="int" />
+          <Property Name="u_weight" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Weather">
+          <Key>
+            <PropertyRef Name="w_date" />
+          </Key>
+          <Property Name="w_date" Type="date" Nullable="false" />
+          <Property Name="w_weather" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="w_temperature" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="Run_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="u_username" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="r_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Run_fk1">
+          <End Role="FeelingAfterRun" Type="Self.FeelingAfterRun" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeelingAfterRun">
+              <PropertyRef Name="far_id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="r_datfeel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_[RunningGroup]_rg_id_fk">
+          <End Role="RunningGroup" Type="Self.RunningGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningGroup">
+              <PropertyRef Name="rg_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="u_runninggroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_fk0">
+          <End Role="RunningGroup" Type="Self.RunningGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningGroup">
+              <PropertyRef Name="rg_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="u_runninggroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ViennaRunsModelStoreContainer">
+          <EntitySet Name="FeelingAfterRun" EntityType="Self.FeelingAfterRun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Run" EntityType="Self.Run" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningGroup" EntityType="Self.RunningGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weather" EntityType="Self.Weather" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Run_fk0" Association="Self.Run_fk0">
+            <End Role="User" EntitySet="User" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+          <AssociationSet Name="Run_fk1" Association="Self.Run_fk1">
+            <End Role="FeelingAfterRun" EntitySet="FeelingAfterRun" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+          <AssociationSet Name="User_[RunningGroup]_rg_id_fk" Association="Self.User_[RunningGroup]_rg_id_fk">
+            <End Role="RunningGroup" EntitySet="RunningGroup" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="User_fk0" Association="Self.User_fk0">
+            <End Role="RunningGroup" EntitySet="RunningGroup" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ViennaRunsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FeelingAfterRun">
+          <Key>
+            <PropertyRef Name="far_id" />
+          </Key>
+          <Property Name="far_id" Type="Int32" Nullable="false" />
+          <Property Name="far_datfeel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Runs" Relationship="Self.Run_fk1" FromRole="FeelingAfterRun" ToRole="Run" />
+        </EntityType>
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int32" Nullable="false" />
+          <Property Name="r_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="r_distance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="r_duration" Type="Int32" Nullable="false" />
+          <Property Name="r_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="r_datfeel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FeelingAfterRun" Relationship="Self.Run_fk1" FromRole="Run" ToRole="FeelingAfterRun" />
+          <NavigationProperty Name="User" Relationship="Self.Run_fk0" FromRole="Run" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RunningGroup">
+          <Key>
+            <PropertyRef Name="rg_id" />
+          </Key>
+          <Property Name="rg_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rg_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.User__RunningGroup__rg_id_fk" FromRole="RunningGroup" ToRole="User" />
+          <NavigationProperty Name="Users1" Relationship="Self.User_fk0" FromRole="RunningGroup" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="u_username" />
+          </Key>
+          <Property Name="u_username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="u_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="u_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="u_runninggroup" Type="Int32" />
+          <Property Name="u_weight" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Runs" Relationship="Self.Run_fk0" FromRole="User" ToRole="Run" />
+          <NavigationProperty Name="RunningGroup" Relationship="Self.User__RunningGroup__rg_id_fk" FromRole="User" ToRole="RunningGroup" />
+          <NavigationProperty Name="RunningGroup1" Relationship="Self.User_fk0" FromRole="User" ToRole="RunningGroup" />
+        </EntityType>
+        <EntityType Name="Weather">
+          <Key>
+            <PropertyRef Name="w_date" />
+          </Key>
+          <Property Name="w_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="w_weather" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="w_temperature" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="Run_fk1">
+          <End Role="FeelingAfterRun" Type="Self.FeelingAfterRun" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeelingAfterRun">
+              <PropertyRef Name="far_id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="r_datfeel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Run_fk0">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="u_username" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="r_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User__RunningGroup__rg_id_fk">
+          <End Role="RunningGroup" Type="Self.RunningGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningGroup">
+              <PropertyRef Name="rg_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="u_runninggroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_fk0">
+          <End Role="RunningGroup" Type="Self.RunningGroup" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningGroup">
+              <PropertyRef Name="rg_id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="u_runninggroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ViennaRunsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeelingAfterRuns" EntityType="Self.FeelingAfterRun" />
+          <EntitySet Name="Runs" EntityType="Self.Run" />
+          <EntitySet Name="RunningGroups" EntityType="Self.RunningGroup" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Weathers" EntityType="Self.Weather" />
+          <AssociationSet Name="Run_fk1" Association="Self.Run_fk1">
+            <End Role="FeelingAfterRun" EntitySet="FeelingAfterRuns" />
+            <End Role="Run" EntitySet="Runs" />
+          </AssociationSet>
+          <AssociationSet Name="Run_fk0" Association="Self.Run_fk0">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Run" EntitySet="Runs" />
+          </AssociationSet>
+          <AssociationSet Name="User__RunningGroup__rg_id_fk" Association="Self.User__RunningGroup__rg_id_fk">
+            <End Role="RunningGroup" EntitySet="RunningGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="User_fk0" Association="Self.User_fk0">
+            <End Role="RunningGroup" EntitySet="RunningGroups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ViennaRunsModelStoreContainer" CdmEntityContainer="ViennaRunsEntities">
+          <EntitySetMapping Name="FeelingAfterRuns">
+            <EntityTypeMapping TypeName="ViennaRunsModel.FeelingAfterRun">
+              <MappingFragment StoreEntitySet="FeelingAfterRun">
+                <ScalarProperty Name="far_id" ColumnName="far_id" />
+                <ScalarProperty Name="far_datfeel" ColumnName="far_datfeel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Runs">
+            <EntityTypeMapping TypeName="ViennaRunsModel.Run">
+              <MappingFragment StoreEntitySet="Run">
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+                <ScalarProperty Name="r_user" ColumnName="r_user" />
+                <ScalarProperty Name="r_distance" ColumnName="r_distance" />
+                <ScalarProperty Name="r_duration" ColumnName="r_duration" />
+                <ScalarProperty Name="r_date" ColumnName="r_date" />
+                <ScalarProperty Name="r_datfeel" ColumnName="r_datfeel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningGroups">
+            <EntityTypeMapping TypeName="ViennaRunsModel.RunningGroup">
+              <MappingFragment StoreEntitySet="RunningGroup">
+                <ScalarProperty Name="rg_name" ColumnName="rg_name" />
+                <ScalarProperty Name="rg_id" ColumnName="rg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ViennaRunsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="u_username" ColumnName="u_username" />
+                <ScalarProperty Name="u_password" ColumnName="u_password" />
+                <ScalarProperty Name="u_email" ColumnName="u_email" />
+                <ScalarProperty Name="u_runninggroup" ColumnName="u_runninggroup" />
+                <ScalarProperty Name="u_weight" ColumnName="u_weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weathers">
+            <EntityTypeMapping TypeName="ViennaRunsModel.Weather">
+              <MappingFragment StoreEntitySet="Weather">
+                <ScalarProperty Name="w_date" ColumnName="w_date" />
+                <ScalarProperty Name="w_weather" ColumnName="w_weather" />
+                <ScalarProperty Name="w_temperature" ColumnName="w_temperature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

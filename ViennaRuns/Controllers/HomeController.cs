@@ -26,5 +26,10 @@ namespace ViennaRuns.Controllers
 
             return View();
         }
+
+        public ActionResult Runs()
+        {
+            return View();
+        }
     }
 }
