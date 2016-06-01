@@ -1,15 +1,5 @@
-﻿CREATE TABLE [User]
-(
-    u_username TEXT PRIMARY KEY,
-    u_password TEXT,
-    u_email TEXT,
-    u_runninggroup INTEGER,
-    u_weight DECIMAL,
-    CONSTRAINT [User_[RunningGroup]]_rg_id_fk] FOREIGN KEY (u_runninggroup) REFERENCES ViennaRuns.[RunningGroup] (rg_id)
-)
-GO
-CREATE TABLE [RunningGroup] (
-	rg_name text NOT NULL,
+﻿CREATE TABLE [RunningGroup] (
+	rg_name varchar(255) NOT NULL,
 	rg_id integer NOT NULL,
   CONSTRAINT [PK_RUNNINGGROUP] PRIMARY KEY CLUSTERED
   (
@@ -21,7 +11,7 @@ CREATE TABLE [RunningGroup] (
 GO
 CREATE TABLE [Weather] (
 	w_date date NOT NULL,
-	w_weather text NOT NULL,
+	w_weather varchar(255) NOT NULL,
 	w_temperature decimal NOT NULL,
   CONSTRAINT [PK_WEATHER] PRIMARY KEY CLUSTERED
   (
@@ -32,7 +22,7 @@ CREATE TABLE [Weather] (
 GO
 CREATE TABLE [Run] (
 	r_id integer NOT NULL,
-	r_user text NOT NULL,
+	r_user varchar(255) NOT NULL,
 	r_distance decimal NOT NULL,
 	r_duration integer NOT NULL,
 	r_date date NOT NULL,
@@ -46,7 +36,7 @@ CREATE TABLE [Run] (
 GO
 CREATE TABLE [FeelingAfterRun] (
 	far_id integer NOT NULL,
-	far_datfeel text NOT NULL,
+	far_datfeel varchar(255) NOT NULL,
   CONSTRAINT [PK_FEELINGAFTERRUN] PRIMARY KEY CLUSTERED
   (
   [far_id] ASC
@@ -54,7 +44,18 @@ CREATE TABLE [FeelingAfterRun] (
 
 )
 GO
-ALTER TABLE [User] WITH CHECK ADD CONSTRAINT [User_fk0] FOREIGN KEY ([runninggroup]) REFERENCES [RunningGroup]([rg_id])
+CREATE TABLE [User]
+(
+    u_username varchar(255) PRIMARY KEY NOT NULL,
+    u_password varchar(255),
+    u_email varchar(255),
+    u_runninggroup INTEGER,
+    u_weight DECIMAL,
+    CONSTRAINT [User_[RunningGroup]]_rg_id_fk] FOREIGN KEY (u_runninggroup) REFERENCES [RunningGroup] (rg_id)
+)
+
+GO
+ALTER TABLE [User] WITH CHECK ADD CONSTRAINT [User_fk0] FOREIGN KEY ([u_runninggroup]) REFERENCES [RunningGroup]([rg_id])
 ON UPDATE CASCADE
 GO
 ALTER TABLE [User] CHECK CONSTRAINT [User_fk0]
