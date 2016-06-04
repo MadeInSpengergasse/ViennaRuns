@@ -40,7 +40,7 @@ namespace ViennaRuns.Controllers
         public ActionResult Create()
         {
             ViewBag.r_datfeel = new SelectList(db.FeelingAfterRuns, "far_id", "far_datfeel");
-            ViewBag.r_user = new SelectList(db.Users, "u_username", "u_password");
+            ViewBag.r_user = new SelectList(db.Users, "u_username", "u_username");
             return View();
         }
 

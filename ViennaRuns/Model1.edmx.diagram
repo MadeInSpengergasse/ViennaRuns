@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d540a9fb2347401080b40beca5bb0108" Name="Diagram1">
+      <Diagram DiagramId="bad56060a6dd46f2b8dad70869b423f8" Name="Diagram1">
         <EntityTypeShape EntityType="ViennaRunsModel.FeelingAfterRun" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ViennaRunsModel.Run" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ViennaRunsModel.RunningGroup" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ViennaRunsModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ViennaRunsModel.Weather" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="ViennaRunsModel.Run_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="ViennaRunsModel.Run_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="ViennaRunsModel.FK__Run__r_datfeel__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ViennaRunsModel.FK__Run__r_user__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="ViennaRunsModel.User__RunningGroup__rg_id_fk" ManuallyRouted="false" />
         <AssociationConnector Association="ViennaRunsModel.User_fk0" ManuallyRouted="false" />
       </Diagram>

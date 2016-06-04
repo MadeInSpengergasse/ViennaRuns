@@ -16,11 +16,11 @@
           <Key>
             <PropertyRef Name="r_id" />
           </Key>
-          <Property Name="r_id" Type="int" Nullable="false" />
+          <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="r_user" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="r_distance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="r_duration" Type="int" Nullable="false" />
-          <Property Name="r_date" Type="date" Nullable="false" />
+          <Property Name="r_date" Type="datetime" Nullable="false" />
           <Property Name="r_datfeel" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RunningGroup">
@@ -48,19 +48,7 @@
           <Property Name="w_weather" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="w_temperature" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <Association Name="Run_fk0">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Run" Type="Self.Run" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="u_username" />
-            </Principal>
-            <Dependent Role="Run">
-              <PropertyRef Name="r_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Run_fk1">
+        <Association Name="FK__Run__r_datfeel__4CA06362">
           <End Role="FeelingAfterRun" Type="Self.FeelingAfterRun" Multiplicity="1" />
           <End Role="Run" Type="Self.Run" Multiplicity="*" />
           <ReferentialConstraint>
@@ -69,6 +57,18 @@
             </Principal>
             <Dependent Role="Run">
               <PropertyRef Name="r_datfeel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Run__r_user__4BAC3F29">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="u_username" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="r_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -102,12 +102,12 @@
           <EntitySet Name="RunningGroup" EntityType="Self.RunningGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Weather" EntityType="Self.Weather" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Run_fk0" Association="Self.Run_fk0">
-            <End Role="User" EntitySet="User" />
+          <AssociationSet Name="FK__Run__r_datfeel__4CA06362" Association="Self.FK__Run__r_datfeel__4CA06362">
+            <End Role="FeelingAfterRun" EntitySet="FeelingAfterRun" />
             <End Role="Run" EntitySet="Run" />
           </AssociationSet>
-          <AssociationSet Name="Run_fk1" Association="Self.Run_fk1">
-            <End Role="FeelingAfterRun" EntitySet="FeelingAfterRun" />
+          <AssociationSet Name="FK__Run__r_user__4BAC3F29" Association="Self.FK__Run__r_user__4BAC3F29">
+            <End Role="User" EntitySet="User" />
             <End Role="Run" EntitySet="Run" />
           </AssociationSet>
           <AssociationSet Name="User_[RunningGroup]_rg_id_fk" Association="Self.User_[RunningGroup]_rg_id_fk">
@@ -130,20 +130,20 @@
           </Key>
           <Property Name="far_id" Type="Int32" Nullable="false" />
           <Property Name="far_datfeel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Runs" Relationship="Self.Run_fk1" FromRole="FeelingAfterRun" ToRole="Run" />
+          <NavigationProperty Name="Runs" Relationship="Self.FK__Run__r_datfeel__4CA06362" FromRole="FeelingAfterRun" ToRole="Run" />
         </EntityType>
         <EntityType Name="Run">
           <Key>
             <PropertyRef Name="r_id" />
           </Key>
-          <Property Name="r_id" Type="Int32" Nullable="false" />
+          <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="r_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="r_distance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="r_duration" Type="Int32" Nullable="false" />
-          <Property Name="r_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="r_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="r_datfeel" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FeelingAfterRun" Relationship="Self.Run_fk1" FromRole="Run" ToRole="FeelingAfterRun" />
-          <NavigationProperty Name="User" Relationship="Self.Run_fk0" FromRole="Run" ToRole="User" />
+          <NavigationProperty Name="FeelingAfterRun" Relationship="Self.FK__Run__r_datfeel__4CA06362" FromRole="Run" ToRole="FeelingAfterRun" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Run__r_user__4BAC3F29" FromRole="Run" ToRole="User" />
         </EntityType>
         <EntityType Name="RunningGroup">
           <Key>
@@ -163,7 +163,7 @@
           <Property Name="u_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="u_runninggroup" Type="Int32" />
           <Property Name="u_weight" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Runs" Relationship="Self.Run_fk0" FromRole="User" ToRole="Run" />
+          <NavigationProperty Name="Runs" Relationship="Self.FK__Run__r_user__4BAC3F29" FromRole="User" ToRole="Run" />
           <NavigationProperty Name="RunningGroup" Relationship="Self.User__RunningGroup__rg_id_fk" FromRole="User" ToRole="RunningGroup" />
           <NavigationProperty Name="RunningGroup1" Relationship="Self.User_fk0" FromRole="User" ToRole="RunningGroup" />
         </EntityType>
@@ -175,7 +175,7 @@
           <Property Name="w_weather" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="w_temperature" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
-        <Association Name="Run_fk1">
+        <Association Name="FK__Run__r_datfeel__4CA06362">
           <End Role="FeelingAfterRun" Type="Self.FeelingAfterRun" Multiplicity="1" />
           <End Role="Run" Type="Self.Run" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Run_fk0">
+        <Association Name="FK__Run__r_user__4BAC3F29">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Run" Type="Self.Run" Multiplicity="*" />
           <ReferentialConstraint>
@@ -229,11 +229,11 @@
           <EntitySet Name="RunningGroups" EntityType="Self.RunningGroup" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Weathers" EntityType="Self.Weather" />
-          <AssociationSet Name="Run_fk1" Association="Self.Run_fk1">
+          <AssociationSet Name="FK__Run__r_datfeel__4CA06362" Association="Self.FK__Run__r_datfeel__4CA06362">
             <End Role="FeelingAfterRun" EntitySet="FeelingAfterRuns" />
             <End Role="Run" EntitySet="Runs" />
           </AssociationSet>
-          <AssociationSet Name="Run_fk0" Association="Self.Run_fk0">
+          <AssociationSet Name="FK__Run__r_user__4BAC3F29" Association="Self.FK__Run__r_user__4BAC3F29">
             <End Role="User" EntitySet="Users" />
             <End Role="Run" EntitySet="Runs" />
           </AssociationSet>
