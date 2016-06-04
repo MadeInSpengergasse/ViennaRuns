@@ -172,6 +172,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RunningGroupsController.cs" />
+    <Compile Include="Controllers\RunsController.cs" />
     <Compile Include="FeelingAfterRun.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -241,6 +243,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -285,6 +289,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Runs.cshtml" />
+    <Content Include="Views\RunningGroups\Create.cshtml" />
+    <Content Include="Views\RunningGroups\Delete.cshtml" />
+    <Content Include="Views\RunningGroups\Details.cshtml" />
+    <Content Include="Views\RunningGroups\Edit.cshtml" />
+    <Content Include="Views\RunningGroups\Index.cshtml" />
+    <Content Include="Views\Runs\Create.cshtml" />
+    <Content Include="Views\Runs\Delete.cshtml" />
+    <Content Include="Views\Runs\Details.cshtml" />
+    <Content Include="Views\Runs\Edit.cshtml" />
+    <Content Include="Views\Runs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,6 +8,7 @@ namespace ViennaRuns.Controllers
 {
     public class HomeController : Controller
     {
+        ViennaRunsEntities db = new ViennaRunsEntities();
         public ActionResult Index()
         {
             return View();
@@ -31,5 +32,7 @@ namespace ViennaRuns.Controllers
         {
             return View();
         }
+
+
     }
 }
