@@ -299,6 +299,7 @@
     <Content Include="Views\Runs\Details.cshtml" />
     <Content Include="Views\Runs\Edit.cshtml" />
     <Content Include="Views\Runs\Index.cshtml" />
+    <Content Include="Views\Shared\_loggedInPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
