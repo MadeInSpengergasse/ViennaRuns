@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ViennaRuns.Run>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Runs";
 }
 
 <h2>Index</h2>
@@ -12,33 +12,33 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.r_distance)
+            Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.r_duration)
+            Duration
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.r_date)
+            Distance
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FeelingAfterRun.far_datfeel)
+            Feeling after run
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.u_username)
+            (User)
         </th>
         <th></th>
     </tr>
-
+    @*<p>@Membership.GetUser().UserName</p>*@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.r_distance)
+            @Html.DisplayFor(modelItem => item.r_date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.r_duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.r_date)
+            @Html.DisplayFor(modelItem => item.r_distance)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FeelingAfterRun.far_datfeel)
@@ -47,11 +47,11 @@
             @Html.DisplayFor(modelItem => item.User.u_username)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.r_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.r_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.r_id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.r_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.r_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.r_id })
         </td>
-    </tr>
+    </tr>     
 }
 
 </table>

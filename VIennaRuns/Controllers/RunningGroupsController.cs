@@ -46,7 +46,7 @@ namespace ViennaRuns.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "rg_name,rg_id")] RunningGroup runningGroup)
+        public ActionResult Create([Bind(Include = "rg_name")] RunningGroup runningGroup)
         {
             if (ModelState.IsValid)
             {
