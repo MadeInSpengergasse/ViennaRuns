@@ -22,7 +22,6 @@ namespace ViennaRuns
     
         public string u_username { get; set; }
         public string u_password { get; set; }
-        public string u_email { get; set; }
         public Nullable<int> u_runninggroup { get; set; }
         public Nullable<decimal> u_weight { get; set; }
     

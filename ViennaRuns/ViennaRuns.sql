@@ -14,15 +14,14 @@ CREATE TABLE FeelingAfterRun
     far_id INT PRIMARY KEY NOT NULL,
     far_datfeel VARCHAR(255) NOT NULL
 );
-CREATE TABLE [User]
-(
-    u_username VARCHAR(255) PRIMARY KEY NOT NULL,
-    u_password VARCHAR(255),
-    u_email VARCHAR(255),
-    u_runninggroup INT,
-    u_weight DECIMAL(18),
-    CONSTRAINT [User_[RunningGroup]]_rg_id_fk] FOREIGN KEY (u_runninggroup) REFERENCES RunningGroup (rg_id),
-    CONSTRAINT User_fk0 FOREIGN KEY (u_runninggroup) REFERENCES RunningGroup (rg_id)
+CREATE TABLE [User] (
+  u_username VARCHAR(255) PRIMARY KEY NOT NULL,
+  u_password VARCHAR(255),
+  u_email VARCHAR(255),
+  u_runninggroup INT,
+  u_weight DECIMAL(18),
+  FOREIGN KEY (u_runninggroup) REFERENCES RunningGroup (rg_id),
+  FOREIGN KEY (u_runninggroup) REFERENCES RunningGroup (rg_id)
 );
 CREATE TABLE Run
 (
