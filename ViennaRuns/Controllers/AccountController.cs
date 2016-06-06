@@ -105,9 +105,10 @@ namespace ViennaRuns.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 Console.WriteLine("--- IMPORTANTT ---");
                 Console.WriteLine(model.Password);
-                entities.Users.Add(new ViennaRuns.User { u_username = model.Username, u_password = model.Password });
+                entities.Users.Add(new ViennaRuns.User { u_username = model.Username, u_password = model.Password, u_weight= model.Weight});
                 entities.SaveChanges();
                 FormsAuthentication.SetAuthCookie(model.Username, false);
                 return RedirectToAction("Index", "Home");
