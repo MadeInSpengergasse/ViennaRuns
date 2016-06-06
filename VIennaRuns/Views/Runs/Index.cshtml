@@ -23,13 +23,11 @@
         <th>
             Feeling after run
         </th>
-        <th>
-            (User)
-        </th>
         <th></th>
     </tr>
     @*<p>@Membership.GetUser().UserName</p>*@
 @foreach (var item in Model) {
+    if(User.Identity.Name == item.r_user) { 
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.r_date)
@@ -44,14 +42,12 @@
             @Html.DisplayFor(modelItem => item.FeelingAfterRun.far_datfeel)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.u_username)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.r_id }) |
             @Html.ActionLink("Details", "Details", new { id = item.r_id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.r_id })
         </td>
     </tr>     
+    }
 }
 
 </table>

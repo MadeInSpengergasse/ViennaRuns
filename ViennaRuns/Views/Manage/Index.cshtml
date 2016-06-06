@@ -12,18 +12,5 @@
     <dl class="dl-horizontal">
         <dt>Username:</dt>
         <dd>@User.Identity.Name</dd>
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
     </dl>
 </div>

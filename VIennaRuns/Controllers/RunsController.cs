@@ -50,10 +50,11 @@ namespace ViennaRuns.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "r_id,r_user,r_distance,r_duration,r_date,r_datfeel")] Run run)
+        public ActionResult Create([Bind(Include = "r_id,r_distance,r_duration,r_date,r_datfeel")] Run run)
         {
             if (ModelState.IsValid)
             {
+                run.r_user = User.Identity.Name;
                 db.Runs.Add(run);
                 db.SaveChanges();
                 return RedirectToAction("Index");
