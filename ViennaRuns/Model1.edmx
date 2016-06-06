@@ -36,7 +36,6 @@
           </Key>
           <Property Name="u_username" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="u_password" Type="varchar" MaxLength="255" />
-          <Property Name="u_email" Type="varchar" MaxLength="255" />
           <Property Name="u_runninggroup" Type="int" />
           <Property Name="u_weight" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
@@ -160,7 +159,6 @@
           </Key>
           <Property Name="u_username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="u_password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="u_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="u_runninggroup" Type="Int32" />
           <Property Name="u_weight" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Runs" Relationship="Self.FK__Run__r_user__4BAC3F29" FromRole="User" ToRole="Run" />
@@ -285,7 +283,6 @@
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="u_username" ColumnName="u_username" />
                 <ScalarProperty Name="u_password" ColumnName="u_password" />
-                <ScalarProperty Name="u_email" ColumnName="u_email" />
                 <ScalarProperty Name="u_runninggroup" ColumnName="u_runninggroup" />
                 <ScalarProperty Name="u_weight" ColumnName="u_weight" />
               </MappingFragment>
