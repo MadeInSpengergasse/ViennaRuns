@@ -52,8 +52,10 @@ namespace ViennaRuns.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "r_id,r_distance,r_duration,r_date,r_datfeel")] Run run)
         {
+            Console.WriteLine("CREATE RUN");
             if (ModelState.IsValid)
             {
+                Console.WriteLine("Should add.");
                 run.r_user = User.Identity.Name;
                 db.Runs.Add(run);
                 db.SaveChanges();
