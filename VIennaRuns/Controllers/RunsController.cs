@@ -16,9 +16,56 @@ namespace ViennaRuns.Controllers
         
 
         // GET: Runs
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string sortType)
         {
             var runs = db.Runs.Include(r => r.FeelingAfterRun).Include(r => r.User);
+            switch (sortType)
+            {
+                case "date":
+                    ViewBag.DateSortParm = sortOrder == "date" ? "date_asc" : "date";
+                    break;
+                case "duration":
+                    ViewBag.DurationSortParm = sortOrder == "duration" ? "duration_asc" : "duration";
+                    break;
+                case "distance":
+                    ViewBag.DistanceSortParm = sortOrder == "distance" ? "distance_asc" : "distance";
+                    break;
+                case "far":
+                    ViewBag.FarSortParm = sortOrder == "far" ? "far_asc" : "far";
+                    break;
+
+            }
+           
+            switch (sortOrder)
+            {
+                case "date":
+                    runs = runs.OrderByDescending(r => r.r_date);
+                    break;
+                case "date_asc":
+                    runs = runs.OrderBy(r => r.r_date);
+                    break;
+                case "duration":
+                    runs = runs.OrderByDescending(r => r.r_duration);
+                    break;
+                case "duration_asc":
+                    runs = runs.OrderBy(r => r.r_duration);
+                    break;
+                case "distance":
+                    runs = runs.OrderByDescending(r => r.r_distance);
+                    break;
+                case "distance_asc":
+                    runs = runs.OrderBy(r => r.r_distance);
+                    break;
+                case "far":
+                    runs = runs.OrderByDescending(r => r.r_datfeel);
+                    break;
+                case "far_asc":
+                    runs = runs.OrderBy(r => r.r_datfeel);
+                    break;
+                default:
+                    runs = runs.OrderByDescending(r => r.r_id);
+                    break;
+            }
             return View(runs.ToList());
         }
 
@@ -41,7 +88,6 @@ namespace ViennaRuns.Controllers
         public ActionResult Create()
         {
             ViewBag.r_datfeel = new SelectList(db.FeelingAfterRuns, "far_id", "far_datfeel");
-            ViewBag.r_user = new SelectList(db.Users, "u_username", "u_username");
             return View();
         }
 
@@ -134,5 +180,6 @@ namespace ViennaRuns.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

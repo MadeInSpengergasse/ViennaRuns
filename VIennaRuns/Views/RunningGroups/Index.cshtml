@@ -14,7 +14,9 @@
         <th>
             Name
         </th>
-        <th></th>
+        <th>
+        Members
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -23,9 +25,17 @@
             @Html.DisplayFor(modelItem => item.rg_name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.rg_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.rg_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.rg_id })
+            <div style="width:120px;height:60px;overflow:auto;padding:1px;">
+                @foreach (var a in item.Users)
+                {
+                    @a.u_username <br/>
+                }
+            </div>
+</td>
+        <td>
+            
+            @Html.ActionLink("Details", "Details", new { id=item.rg_id }) 
+           
         </td>
     </tr>
 }

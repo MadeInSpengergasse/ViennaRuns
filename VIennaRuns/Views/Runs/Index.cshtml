@@ -9,19 +9,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
-            Date
+           @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm , sortType = "date"})
         </th>
         <th>
-            Duration
+           @Html.ActionLink("Duration", "Index", new { sortOrder = ViewBag.DurationSortParm, sortType = "duration" })
         </th>
         <th>
-            Distance
+           @Html.ActionLink("Distance", "Index", new { sortOrder = ViewBag.DistanceSortParm, sortType = "distance" })
         </th>
         <th>
-            Feeling after run
+           @Html.ActionLink("Feeling after Run", "Index", new { sortOrder = ViewBag.FarSortParm, sortType = "far" })
         </th>
         <th></th>
     </tr>
@@ -33,7 +34,7 @@
             @Html.DisplayFor(modelItem => item.r_date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.r_duration)
+            @Html.DisplayFor(modelItem => item.r_duration) min
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.r_distance)
