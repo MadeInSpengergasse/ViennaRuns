@@ -12,5 +12,13 @@
     <dl class="dl-horizontal">
         <dt>Username:</dt>
         <dd>@User.Identity.Name</dd>
+        <dt>RunningGroup:</dt>
+        @if (Model.RunningGroup != "")
+        {
+            <dd>@Model.RunningGroup - @Html.ActionLink("leave runninggroup?", "LeaveGroup")</dd>
+        } else
+        {
+            <dd>You are not part of a running group. You can join one in the "RunningGroups" menu.</dd>
+        }
     </dl>
 </div>

@@ -115,6 +115,18 @@ namespace ViennaRuns.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult JoinGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var result = db.Users.SingleOrDefault(b => b.u_username == User.Identity.Name);
+            result.u_runninggroup = id;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

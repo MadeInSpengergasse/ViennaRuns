@@ -16,8 +16,11 @@ namespace ViennaRuns.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ViennaRunsEntities entities;
+
         public ManageController()
         {
+            entities = new ViennaRunsEntities();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -50,11 +53,21 @@ namespace ViennaRuns.Controllers
             }
         }
 
+        public ActionResult LeaveGroup()
+        {
+            var result = entities.Users.SingleOrDefault(b => b.u_username == User.Identity.Name);
+            result.u_runninggroup = null;
+            entities.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            return View();
+            var rungroup = entities.Users.SingleOrDefault(b => b.u_username == User.Identity.Name);
+            var asd = rungroup.u_runninggroup.ToString();
+            return View(new IndexViewModel() { RunningGroup=rungroup.RunningGroup.rg_name });
         }
 
         //
@@ -141,29 +154,6 @@ namespace ViennaRuns.Controllers
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins
             });
-        }
-
-        //
-        // POST: /Manage/LinkLogin
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider)
-        {
-            // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
-        }
-
-        //
-        // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback()
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
-            {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
-            }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
         protected override void Dispose(bool disposing)
