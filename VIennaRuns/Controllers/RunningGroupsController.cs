@@ -23,6 +23,7 @@ namespace ViennaRuns.Controllers
         // GET: RunningGroups/Details/5
         public ActionResult Details(int? id)
         {
+            var aspsucks = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -31,6 +32,10 @@ namespace ViennaRuns.Controllers
             if (runningGroup == null)
             {
                 return HttpNotFound();
+            }
+            if(db.Users.SingleOrDefault(a => a.u_username == User.Identity.Name).u_runninggroup != null)
+            {
+                runningGroup.rg_id = -1;
             }
             return View(runningGroup);
         }
