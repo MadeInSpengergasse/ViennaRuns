@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,8 +17,9 @@ namespace ViennaRuns.Controllers
         
 
         // GET: Runs
-        public ActionResult Index(string sortOrder, string sortType)
+        public ActionResult Index(string sortOrder, string sortType, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             var runs = db.Runs.Include(r => r.FeelingAfterRun).Include(r => r.User);
             switch (sortType)
             {
@@ -66,7 +68,10 @@ namespace ViennaRuns.Controllers
                     runs = runs.OrderByDescending(r => r.r_id);
                     break;
             }
-            return View(runs.ToList());
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            var a = runs.ToPagedList(pageNumber, pageSize);
+            return View(runs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Runs/Details/5

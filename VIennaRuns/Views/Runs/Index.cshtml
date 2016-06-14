@@ -1,5 +1,5 @@
-﻿@model IEnumerable<ViennaRuns.Run>
-
+﻿@model PagedList.IPagedList<ViennaRuns.Run>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Runs";
 }
@@ -52,3 +52,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort  }))
