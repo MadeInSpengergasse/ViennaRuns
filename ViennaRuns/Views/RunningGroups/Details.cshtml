@@ -8,11 +8,6 @@
 
 <div>
     <h4>RunningGroup</h4>
-    @Model.Users.Count
-    @foreach(var a in Model.Users)
-    {
-        @a
-    }
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,11 +21,11 @@
         <dd>
             @foreach (var a in Model.Users)
             {
-                @a.u_username
+                @a.u_username<br />
             }
         </dd>
     </dl>
-    @if(Model.rg_id != -1) { 
+    @if(Model.rg_name != "") { 
         @Html.ActionLink("Join Group", "JoinGroup", new { id=Model.rg_id })
     }
 </div>

@@ -28,7 +28,6 @@
     </tr>
     @*<p>@Membership.GetUser().UserName</p>*@
 @foreach (var item in Model) {
-    if(User.Identity.Name == item.r_user) { 
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.r_date)
@@ -53,7 +52,6 @@
             @Html.ActionLink("Delete", "Delete", new { id = item.r_id })
         </td>
     </tr>     
-    }
 }
 
 </table>

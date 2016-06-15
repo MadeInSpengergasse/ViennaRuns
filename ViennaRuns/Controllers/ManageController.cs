@@ -66,7 +66,10 @@ namespace ViennaRuns.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             var rungroup = entities.Users.SingleOrDefault(b => b.u_username == User.Identity.Name);
-            var asd = rungroup.u_runninggroup.ToString();
+            if(rungroup.u_runninggroup == null)
+            {
+                return View(new IndexViewModel() { RunningGroup = "" });
+            }
             return View(new IndexViewModel() { RunningGroup=rungroup.RunningGroup.rg_name });
         }
 

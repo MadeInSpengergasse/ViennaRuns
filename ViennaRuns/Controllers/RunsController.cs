@@ -20,7 +20,7 @@ namespace ViennaRuns.Controllers
         public ActionResult Index(string sortOrder, string sortType, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            var runs = db.Runs.Include(r => r.FeelingAfterRun).Include(r => r.User);
+            var runs = db.Runs.Include(r => r.FeelingAfterRun).Include(r => r.User).Where(r => r.r_user == User.Identity.Name);
             switch (sortType)
             {
                 case "date":

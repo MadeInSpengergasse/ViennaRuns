@@ -1,7 +1,12 @@
 ﻿body {
+
 }
 
 #middle {
     margin: 0 auto;
     width: 500px;
+}
+
+.navbar-inverse {
+    color: #428bca;
 }

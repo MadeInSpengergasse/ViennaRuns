@@ -1,7 +1,7 @@
 ﻿CREATE TABLE RunningGroup
 (
     rg_name VARCHAR(255) NOT NULL,
-    rg_id INT PRIMARY KEY NOT NULL
+    rg_id INT PRIMARY KEY NOT NULL IDENTITY
 );
 CREATE TABLE Weather
 (
