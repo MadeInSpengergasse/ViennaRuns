@@ -37,10 +37,15 @@
             @Html.DisplayFor(modelItem => item.r_duration) min
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.r_distance)
+            @Html.DisplayFor(modelItem => item.r_distance) km
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FeelingAfterRun.far_datfeel)
+            @if (item.FeelingAfterRun.far_datfeel.Equals("Good"))
+            {
+                <img src="~/Pictures/Happy_smiley.svg" width="20" />
+            }else{ 
+            <img src="~/Pictures/Sad_smiley.svg" width="20" />
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.r_id }) |

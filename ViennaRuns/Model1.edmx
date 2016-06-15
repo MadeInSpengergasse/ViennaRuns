@@ -18,7 +18,7 @@
           </Key>
           <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="r_user" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="r_distance" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="r_distance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="r_duration" Type="int" Nullable="false" />
           <Property Name="r_date" Type="datetime" Nullable="false" />
           <Property Name="r_datfeel" Type="int" Nullable="false" />
@@ -137,7 +137,7 @@
           </Key>
           <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="r_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="r_distance" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="r_distance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="r_duration" Type="Int32" Nullable="false" />
           <Property Name="r_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="r_datfeel" Type="Int32" Nullable="false" />

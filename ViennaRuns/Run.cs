@@ -19,7 +19,6 @@ namespace ViennaRuns
         public string r_user { get; set; }
         public decimal r_distance { get; set; }
         public int r_duration { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
