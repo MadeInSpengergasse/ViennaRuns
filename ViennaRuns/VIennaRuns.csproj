@@ -249,7 +249,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Pictures\Happy_smiley.svg" />
-    <Content Include="Pictures\Run_logo.svg" />
+    <Content Include="Pictures\Run_logo.jpg" />
     <Content Include="Pictures\Sad_smiley.svg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />

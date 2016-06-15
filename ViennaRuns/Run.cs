@@ -11,17 +11,13 @@ namespace ViennaRuns
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Run
     {
         public int r_id { get; set; }
         public string r_user { get; set; }
         public decimal r_distance { get; set; }
         public int r_duration { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date")]
         public System.DateTime r_date { get; set; }
         public int r_datfeel { get; set; }
     
