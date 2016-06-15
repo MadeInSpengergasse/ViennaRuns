@@ -15,9 +15,25 @@ namespace ViennaRuns.Controllers
         private ViennaRunsEntities db = new ViennaRunsEntities();
 
         // GET: RunningGroups
-        public ActionResult Index()
+        public ActionResult Index(string filter, string searchString)
         {
-            return View(db.RunningGroups.ToList());
+            ViewBag.Filter = searchString;
+
+            var groups = from g in db.RunningGroups select g;
+
+           
+                if (!(String.IsNullOrEmpty(searchString)))
+            {
+            
+                
+            
+
+            
+                groups = groups.Where(a => a.rg_name.Contains(searchString));
+                
+                
+            }
+            return View(groups.ToList());
         }
 
         // GET: RunningGroups/Details/5
